@@ -1,0 +1,14 @@
+The idea is to have the program start with an enter pin window. It will either take you to the servers floor view or the customer view. Customers will have access to the menu, place orders, view their orders and total, and signal the servers for the check. The servers will be able to see the floor layout and tables and also be able to see the tables orders, totals, and whether the patrons are ready to leave.
+
+We've got the basic GUI layout and class functions created and need to put them together. The customer gui needs to have all the menu and table functions added in. Then we need to get the employee class and pin codes created for the initial system startup. 
+
+
+
+
+Mitchell To-do:
+	- Add Employee class
+	- Add error handling 
+	- Customize Menu functions 
+  - Populate menu
+
+	
