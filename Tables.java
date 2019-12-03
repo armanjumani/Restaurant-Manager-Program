@@ -1,18 +1,19 @@
 import java.util.*;
 
-public class Tables {
+public class Tables 
+{
 	private boolean available;
 	private int numSeats;
 	private boolean ready;
-	private int tableNum;
+	//private int tableNum;
 
 	ArrayList<Item> orders = new ArrayList<>(); //list of the tables orders
 	
-	public Tables(boolean available, int numSeats, boolean ready, int tableNum) {
+	public Tables(boolean available, int numSeats, boolean ready/*, int tableNum*/) {
 		this.available = available;
 		this.numSeats = numSeats;
 		this.ready = ready;
-		this.tableNum = tableNum;
+		//this.tableNum = tableNum;
 	}
 	
 	//adds an item to the list of orders for this table
@@ -21,11 +22,11 @@ public class Tables {
 	}
 	
 	//remove an item from the orders list
-	public void removeOrder(Item i) {
-		for (Item x : orders) {
-			if (i == x) {
-				orders.remove(x);
-			}
+	public void removeOrder(Item i) 
+	{
+		if(orders.contains(i)) 
+		{
+			orders.remove(i);
 		}
 	}
 	
@@ -62,7 +63,7 @@ public class Tables {
 	public void setReady(boolean ready) {
 		this.ready = ready;
 	}
-
+/*
 	public int getTableNum() {
 		return tableNum;
 	}
@@ -70,7 +71,7 @@ public class Tables {
 	public void setTableNum(int tableNum) {
 		this.tableNum = tableNum;
 	}
-	
+	*/
 	
 
 }

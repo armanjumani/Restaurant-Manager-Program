@@ -1,16 +1,25 @@
-import java.util.HashMap;
 
+import java.util.*;
 public class UniversalManager 
 {
-	private Tables[] tablesArray = new Tables[6];
-	private HashMap<Integer,Employee> eMap = new HashMap<Integer, Employee>();
+	private static Tables[] tablesArray = new Tables[6];
+	static Menu menu = new Menu();
 	
-	public static boolean checkEmployee(int employeeNumber) 
+	public static void init() 
 	{
-		if(eMap.containsKey(employeeNumber)) 
+		for(int x = 0; x < tablesArray.length; x++) 
 		{
-			return true;
+			tablesArray[x] = new Tables(true,6,false);
 		}
-		return false;
+	}
+	
+	public static Tables getTable(int tableNumber) 
+	{
+		return(tablesArray[tableNumber-1]);
+	}
+	
+	public static Menu getMenu() 
+	{
+		return menu;
 	}
 }
