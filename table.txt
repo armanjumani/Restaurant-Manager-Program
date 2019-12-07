@@ -1,0 +1,13 @@
+tableEditorGUI:
+- Should be able to display which tables
+  are ready to leave and if they are available
+- The start up screen should deny access to a table
+  that is already taken
+- The check out method should reset the availability
+  of the table
+- Managers are the only people that can add more tables
+  to the list and customize the number of seats
+- Managers have the ability to delete tables from the
+  list in UniversalManager.
+- Up to your discretion to edit things to streamline
+  the tableGUI process.
