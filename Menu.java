@@ -44,14 +44,21 @@ public class Menu {
 		Item a = new Item(name, description, price,file);
 		menu.add(a);
 	}
+	public void addItem(Item i, int index) 
+	{
+		menu.add(index, i);
+	}
 	
 	//removes an item from the menu
-	public void removeItem(Item i) {
+	public boolean removeItem(Item i) 
+	{
 		for (Item i2 : menu) {
 			if (i == i2) {
 				menu.remove(i2);
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	//adds the item to the tables order list

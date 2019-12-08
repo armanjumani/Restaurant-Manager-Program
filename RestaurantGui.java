@@ -4,6 +4,7 @@ import javafx.scene.layout.Border;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class RestaurantGui implements ActionListener
@@ -11,9 +12,9 @@ public class RestaurantGui implements ActionListener
 	private JFrame frameOfStartup;
 	private JPanel panel;
 	private JTextField tf;
-	
 	public RestaurantGui() 
 	{
+		
 		//Initiates the JFrames
 		frameOfStartup = new JFrame("Aaron's Restaurant");
 		frameOfStartup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,15 +45,15 @@ public class RestaurantGui implements ActionListener
 		if(isNumber(text)) 
 		{
 			//check if its a table number or employee ID
-			if(Integer.parseInt(text) <= 6 && Integer.parseInt(text) > 0) 
+			if(Integer.parseInt(text) > 0 && UniversalManager.getTable(Integer.parseInt(text)) != null) 
 			{
-				frameOfStartup.setVisible(false);
-				UniversalManager.init();
+				//frameOfStartup.setVisible(false);
 				new CustomerGUI(Integer.parseInt(text));
 			}
-			else 
+			else if(UniversalManager.isEmployee(Integer.parseInt(text)))
 			{
-				JOptionPane.showMessageDialog(frameOfStartup, "This is not a valid table number! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+				//frameOfStartup.setVisible(false);
+				new EmployeeGUI(Integer.parseInt(text));
 			}
 		}
 		else 
@@ -60,21 +61,22 @@ public class RestaurantGui implements ActionListener
 			JOptionPane.showMessageDialog(frameOfStartup, "This is not a valid table number! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	/**
+	 * @return true if the text is a number text otherwise it would return false if the method throws an exception
+	 */
 	private boolean isNumber(String text) 
 	{
 		try 
 		{
 			Integer i = Integer.parseInt(text);
 		}
+		//checks if the exception is a nullpointer or not a number
 		catch(NumberFormatException | NullPointerException nf) 
 		{
 			return false;
 		}
 		return true;
 	}
-	public static void main(String[] args) 
-	{
-		RestaurantGui test = new RestaurantGui();
-	}
+	//runs the class
+
 }
