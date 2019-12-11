@@ -41,12 +41,17 @@ public class UniversalManager
 		Tables desiredTable = null;
 		for(Tables t : tablesArray) 
 		{
-			if(t.getTableNum() == tableNumber && t.isAvailable()) 
+			if(t.getTableNum() == tableNumber) 
 			{
 				desiredTable = t;
+				
 			}
 		}
 		return desiredTable;
+	}
+	
+	public static int getNumOfTables() {
+		return tablesArray.size();
 	}
 	
 	public static boolean addTable(Tables table) 
