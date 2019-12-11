@@ -79,7 +79,123 @@ public class EmployeeGUI
 	/************************************Small GUI*******************************************************/
 	public void tableEditorGUI() 
 	{
+			
+		//init components 
+		JFrame tableEditor = new JFrame("Tables");
+		JPanel panel = new JPanel();
+		ArrayList<JButton> tableButtons = new ArrayList<JButton>();
+		JButton exit, edit;
+		int numOfTables = UniversalManager.getNumOfTables();
+		boolean managerIn = false;
 		
+		
+		public tableEditorGUI() 
+		{
+			//init frame
+			panel.setBackground(Color.GRAY);
+			tableEditor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			tableEditor.setSize(400,400);
+			//sets up how many tables/buttons to show
+			if (numOfTables % 2 == 0) 
+			{
+				panel.setLayout(new GridLayout((numOfTables + 2)/ 2, 2));
+			}
+			else 
+			{
+				panel.setLayout(new GridLayout((numOfTables + 2)/ 3, 2));
+			}
+			
+			
+			//add all tables as buttons to array
+			for (int x = 0; x < numOfTables; ++x) 
+			{
+				tableButtons.add(new JButton("Table "+ UniversalManager.getTable(x+1).getTableNum()));
+			}
+			
+			exit = new JButton("Close");
+			edit = new JButton("Edit");
+
+			//adds listeners to each button
+			for (int x = 1; x <= numOfTables;)
+			{
+				for (JButton butt : tableButtons) 
+				{
+					int w = x;
+					butt.addActionListener(new ActionListener()
+					{
+						int y = w;
+						public void actionPerformed(ActionEvent e)
+						{
+							int i = y;
+							if (managerIn)
+							{
+								; //TODO
+							}
+							else //for now it only clears a tables ready status and makes it available
+							{
+								UniversalManager.getTable(i).setReady(false);
+								tableEditor.setVisible(false);
+								new tableEditorGUI();
+							}
+						}
+					});
+					++x;
+				}
+			}
+			//closes table window
+			exit.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					tableEditor.setVisible(false);
+					
+				}
+			});
+			//turns on manager mode
+			edit.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent evt) 
+				{
+					String pin = JOptionPane.showInputDialog(tableEditor, "Enter Manager Pin: ");
+					if(UniversalManager.checkManagerCode(pin)) 
+					{
+						JOptionPane.showMessageDialog(tableEditor, "Managerial Function allowed", "Done",JOptionPane.WARNING_MESSAGE);
+						managerIn = true;
+					}
+					
+				}
+			});
+			
+			//add all buttons to panel and show availability
+			int buttNum = 1;
+			for (JButton butt : tableButtons) 
+			{
+				if (UniversalManager.getTable(buttNum).isReady()) 
+				{
+					butt.setBackground(Color.BLUE);
+				}
+				else if (UniversalManager.getTable(buttNum).isAvailable()) 
+				{
+					butt.setBackground(Color.GREEN);
+					
+				}
+				else if (!UniversalManager.getTable(buttNum).isAvailable()) 
+				{
+					butt.setBackground(Color.RED);
+					
+				}
+				
+				++buttNum;
+				panel.add(butt);
+			}
+			panel.add(exit);
+			panel.add(edit);
+			tableEditor.add(panel);
+			tableEditor.setVisible(true);
+		}
+		
+		
+	
 	}
 	private class menuEditorGUI
 	{
