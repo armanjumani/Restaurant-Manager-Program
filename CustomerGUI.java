@@ -133,8 +133,14 @@ public class CustomerGUI
 			{
 				public void actionPerformed(ActionEvent evt) 
 				{
+					if (index == 0) 
+					{ 
+						menuFrame.setVisible(false);
+						index = menu.size() - 1;
+						new menuGUI();
+					}
 					//only goes back if it can go back
-					if(index - 1 >= 0)
+					else if(index - 1 >= 0)
 					{
 						//trick the user into thinking they flipped a page when really they just made a new gui
 						menuFrame.setVisible(false);
@@ -147,8 +153,14 @@ public class CustomerGUI
 			{
 				public void actionPerformed(ActionEvent evt) 
 				{
+					if (index == menu.size() - 1) 
+					{ 
+						menuFrame.setVisible(false);
+						index = 0;
+						new menuGUI();
+					}
 					//only goes forward if it can go forward
-					if(index+1 < menu.size()) 
+					else if(index+1 < menu.size()) 
 					{
 						menuFrame.setVisible(false);
 						index++;
@@ -225,6 +237,8 @@ public class CustomerGUI
 					"\n A server has been notified and will be with you shortly!", "See You Later!", JOptionPane.PLAIN_MESSAGE);
 			//returns the data back to the OS and terminates cleanly
 			frame.dispose();
+			table.setReady(true);
+			table.setAvailable(true);
 		}
 	}
 /*****************************************************TOTAL GUI*******************************************************************************/
