@@ -44,16 +44,33 @@ public class RestaurantGui implements ActionListener
 		//check if its a logical number
 		if(isNumber(text)) 
 		{
-			//check if its a table number or employee ID
-			if(Integer.parseInt(text) > 0 && UniversalManager.getTable(Integer.parseInt(text)) != null) 
-			{
-				//frameOfStartup.setVisible(false);
-				new CustomerGUI(Integer.parseInt(text));
+			//checks if within or range of tables
+			if (Integer.parseInt(text) > 0 && Integer.parseInt(text) <= UniversalManager.getNumOfTables()) 
+			{	
+				//if table is available
+				if (UniversalManager.getTable(Integer.parseInt(text)).isAvailable()) 
+				{
+					//frameOfStartup.setVisible(false);
+					//sets new table to false
+					UniversalManager.getTable(Integer.parseInt(text)).setAvailable(false);
+					new CustomerGUI(Integer.parseInt(text));
+				}
+				//displays error if not
+				else 
+				{
+					JOptionPane.showMessageDialog(frameOfStartup, "That is not an available table! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					
+				}
 			}
+			//checks for employee
 			else if(UniversalManager.isEmployee(Integer.parseInt(text)))
 			{
 				//frameOfStartup.setVisible(false);
 				new EmployeeGUI(Integer.parseInt(text));
+			}
+			else 
+			{
+				JOptionPane.showMessageDialog(frameOfStartup, "This is not a valid table number! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else 
