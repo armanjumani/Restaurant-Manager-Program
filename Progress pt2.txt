@@ -1,5 +1,12 @@
+Mitchell's Work since Presentation
 - Added new managerGui with functions to add and remove employees and change table seating
 -Streamlined tableEditor 
 - Added more detection to RestaurantGui to recognize manager pin
 - Added helper functions to UniversalManager
 - Managers can now add and remove tables from the employeeGUI
+
+Arman's Work since Presentation
+-Added a new Employee GUI with functions to edit menu, clock in, and check current orders
+-Added a way for the UniversalManager class to access the orders and employees
+-Edited Employee Class a bit to work with Employee GUI
+-created a test class to run the project on.
