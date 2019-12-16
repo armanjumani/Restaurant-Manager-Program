@@ -42,31 +42,46 @@ public class RestaurantGui implements ActionListener
 	{
 		String text = tf.getText();
 		//check if its a logical number
-		if(isNumber(text)) 
+		if(UniversalManager.isNumber(text)) 
 		{
+			int x = Integer.parseInt(text);
 			//checks if within or range of tables
-			if (Integer.parseInt(text) > 0 && Integer.parseInt(text) <= UniversalManager.getNumOfTables()) 
+			if (x > 0 && x <= UniversalManager.getNumOfTables()) 
 			{	
-				//if table is available
-				if (UniversalManager.getTable(Integer.parseInt(text)).isAvailable()) 
+				if (UniversalManager.checkTable(x))
 				{
-					//frameOfStartup.setVisible(false);
-					//sets new table to false
-					UniversalManager.getTable(Integer.parseInt(text)).setAvailable(false);
-					new CustomerGUI(Integer.parseInt(text));
+					//if table is available
+					if (UniversalManager.getTable(x).isAvailable()) 
+					{
+						//frameOfStartup.setVisible(false);
+						//sets new table to false
+						UniversalManager.getTable(x).setAvailable(false);
+						new CustomerGUI(x);
+					}
+					//displays error if not
+					else 
+					{
+						JOptionPane.showMessageDialog(frameOfStartup, "That is not an available table! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+						
+					}
 				}
-				//displays error if not
 				else 
 				{
-					JOptionPane.showMessageDialog(frameOfStartup, "That is not an available table! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frameOfStartup, "This is not a valid table number! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
 				}
+				
 			}
 			//checks for employee
-			else if(UniversalManager.isEmployee(Integer.parseInt(text)))
+			else if(UniversalManager.isEmployee(x))
 			{
 				//frameOfStartup.setVisible(false);
-				new EmployeeGUI(Integer.parseInt(text));
+				new EmployeeGUI(x);
+			}
+			//checks for manager
+			else if (UniversalManager.checkManagerCode(text))
+			{
+				new managerEditorGUI();
 			}
 			else 
 			{
@@ -78,22 +93,5 @@ public class RestaurantGui implements ActionListener
 			JOptionPane.showMessageDialog(frameOfStartup, "This is not a valid table number! \nPlease Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	/**
-	 * @return true if the text is a number text otherwise it would return false if the method throws an exception
-	 */
-	private boolean isNumber(String text) 
-	{
-		try 
-		{
-			Integer i = Integer.parseInt(text);
-		}
-		//checks if the exception is a nullpointer or not a number
-		catch(NumberFormatException | NullPointerException nf) 
-		{
-			return false;
-		}
-		return true;
-	}
-	//runs the class
 
 }
