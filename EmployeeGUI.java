@@ -56,7 +56,8 @@ public class EmployeeGUI
 		tableEditor.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt) 
 			{
-				tableEditorGUI();
+				/**NEEDS TO BE EDITED*/
+				new tableEditorGUI(false);
 			}
 		});
 		timeClocks.addActionListener(new ActionListener(){
@@ -410,6 +411,10 @@ public class EmployeeGUI
 		JFrame frame = new JFrame();
 		JPanel buttonPanel = new JPanel();
 		JButton clockIn = new JButton("Clock In");
+		if(currentEmployee.getIsSignedIn()) 
+		{
+			clockIn.setText("Exit");
+		}
 		JButton clockOut = new JButton("Clock Out");
 		JButton meal = new JButton("Meal Out");
 		JButton checkTimes = new JButton("Check Times");
@@ -427,6 +432,11 @@ public class EmployeeGUI
 					frame.dispose();
 					new EmployeeGUI(currentEmployee.getEmployeeNumber());
 				}
+				else 
+				{
+					frame.dispose();
+					new EmployeeGUI(currentEmployee.getEmployeeNumber());
+				}
 			}
 		});
 		clockOut.addActionListener(new ActionListener() 
@@ -435,6 +445,7 @@ public class EmployeeGUI
 			{
 				if(currentEmployee.getIsSignedIn()) 
 				{
+					clockIn.setText("Clock In");
 					int n = JOptionPane.showConfirmDialog(frame, "Would you like to sign out for the day?", "Confirmation Message", JOptionPane.YES_NO_OPTION);
 					if(n == 0) 
 					{
