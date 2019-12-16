@@ -1,0 +1,5 @@
+- Added new managerGui with functions to add and remove employees and change table seating
+-Streamlined tableEditor 
+- Added more detection to RestaurantGui to recognize manager pin
+- Added helper functions to UniversalManager
+- Managers can now add and remove tables from the employeeGUI
